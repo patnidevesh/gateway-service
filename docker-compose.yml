@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  krakend:
+    build:
+      context: ./krakend
+      dockerfile: Dockerfile
+    image: krakend
+    ports:
+      - 8080:8080
+    volumes:
+      - ./krakend/krakend.json:/etc/krakend/krakend.json
+    depends_on:
+      - service-1
+      - service-2
+    networks:
+      - krakend-network
+    environment:
+      - SERVICE_ONE=service-1
+      - SERVICE_TWO=service-2
+  
+  service-1:
+    build:
+      context: ./service-1
+      dockerfile: Dockerfile
+    image: service-1
+    ports:
+      - 3000:3000
+    networks:
+      - krakend-network
+  
+  service-2:
+    build:
+      context: ./service-2
+      dockerfile: Dockerfile
+    image: service-2
+    ports:
+      - 3001:3001
+    networks:
+      - krakend-network
+
+networks:
+  krakend-network:

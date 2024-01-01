@@ -1,0 +1,23 @@
+{
+  "version": 3,
+  "endpoints": [
+    {
+      "endpoint": "/serviceone",
+      "backend": [
+        {
+          "url_pattern": "/serviceone",
+          "host": ["{{ env SERVICE_ONE }}:3000"]
+        }
+      ]
+    },
+    {
+      "endpoint":"/servicetwo",
+      "backend":[
+        {
+          "url_pattern": "/servicetwo",
+          "host": ["{{ env SERVICE_TWO }}:3001"]
+        }
+      ]
+    }
+  ]
+}
